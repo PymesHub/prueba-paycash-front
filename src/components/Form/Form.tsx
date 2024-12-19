@@ -1,8 +1,9 @@
-'use client';
+"use client";
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { TypeWithKey } from '@/utils/TypeWithKey';
-import React, { useEffect, useRef } from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
+import React, { useEffect, useRef } from "react";
+import { FormProvider, useForm } from "react-hook-form";
+
+import { TypeWithKey } from "@/src/utils/TypeWithKey";
 
 export interface FormInterface {
   className?: string;
@@ -18,8 +19,8 @@ function deepEqual(obj1: any, obj2: any): boolean {
     return true;
   }
   if (
-    typeof obj1 !== 'object' ||
-    typeof obj2 !== 'object' ||
+    typeof obj1 !== "object" ||
+    typeof obj2 !== "object" ||
     obj1 == null ||
     obj2 == null
   ) {
@@ -50,7 +51,7 @@ const Form: React.FC<FormInterface> = ({
   handleGetValues,
   id,
 }) => {
-  const methods = useForm({ mode: 'all', defaultValues: defaultValues });
+  const methods = useForm({ mode: "all", defaultValues: defaultValues });
   const { handleSubmit, watch } = methods;
 
   const values = watch();
