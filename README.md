@@ -1,53 +1,91 @@
-# Next.js & NextUI Template
+# 🚀 **Next.js Clean Architecture App**
 
-This is a template for creating applications using Next.js 14 (app directory) and NextUI (v2).
+¡Bienvenido! Este proyecto es una **aplicación web moderna** construida con tecnologías de punta, enfocada en **Clean Architecture** para mantener la lógica desacoplada y bien organizada. 🧹✨
 
-[Try it on CodeSandbox](https://githubbox.com/nextui-org/next-app-template)
+---
 
-## Technologies Used
+## 🛠️ **Tecnologías principales**
 
-- [Next.js 14](https://nextjs.org/docs/getting-started)
-- [NextUI v2](https://nextui.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Tailwind Variants](https://tailwind-variants.org)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [next-themes](https://github.com/pacocoursey/next-themes)
+### Frontend 🌐
 
-## How to Use
+- **[Next.js](https://nextjs.org/):** Framework React para aplicaciones web rápidas y escalables.
+- **[NextUI](https://nextui.org/):** Librería de componentes UI para un diseño moderno y atractivo.
+- **[React](https://reactjs.org/):** Biblioteca de JavaScript para interfaces de usuario interactivas.
+- **[TypeScript](https://www.typescriptlang.org/):** Tipado estático para un código robusto y claro.
+- **[useSWR](https://swr.vercel.app/):** Manejo de datos con soporte para revalidación en tiempo real.
 
-### Use the template with create-next-app
+### Backend 🖧
 
-To create a new project based on this template using `create-next-app`, run the following command:
+- **AWS Lambda:** Microservicios serverless, altamente escalables y eficientes.
+- **Clean Architecture:** Separación de responsabilidades para un código limpio y mantenible.
+
+---
+
+## 🎯 **Características principales**
+
+- 📏 **Clean Architecture**: Organización del proyecto que separa la lógica de negocio de la implementación, asegurando modularidad y facilidad de mantenimiento.
+- 🎨 **UI moderna**: Diseñada con **NextUI** para una experiencia de usuario fluida y atractiva.
+- ⚡ **Eficiencia**: Utiliza **AWS Lambda** para manejar el backend de manera escalable y sin servidores.
+- 📡 **Data Fetching**: Implementado con **useSWR** para gestionar datos con revalidación automática.
+- 🛡️ **Seguridad y escalabilidad**: Integración con TypeScript para prevenir errores en tiempo de desarrollo.
+- **Despeglado en amplify**: No te preocupes por correrlo en tu entorno local, ya esta implementando en amplify:
+
+---
+
+## 🚀 **Cómo correr este proyecto**
+
+### 1️⃣ Clona el repositorio
 
 ```bash
-npx create-next-app -e https://github.com/nextui-org/next-app-template
+git clone https://github.com/tuusuario/nombre-proyecto.git
+cd nombre-proyecto
 ```
 
-### Install dependencies
-
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
+### 2️⃣ Instala las dependencias
 
 ```bash
-npm install
+npm install --force (existe una dependecia react-lottie que no es compatible con las nuevas versiones)
+# o
+yarn install
 ```
 
-### Run the development server
+### 3️⃣ Crea un archivo `.env`
+
+Define las variables necesarias para la conexión con el backend. Por ejemplo:
+
+```
+NEXT_PUBLIC_API_URL=https://api.example.com
+```
+
+### 4️⃣ Corre el proyecto en modo desarrollo
 
 ```bash
 npm run dev
 ```
 
-### Setup pnpm (optional)
+### 5️⃣ Abre tu navegador
 
-If you are using `pnpm`, you need to add the following code to your `.npmrc` file:
+Visita: [http://localhost:3000](http://localhost:3000) 🚀
 
-```bash
-public-hoist-pattern[]=*@nextui-org/*
-```
+---
 
-After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
+## 🔧 **Scripts útiles**
 
-## License
+| Comando         | Descripción                             |
+| --------------- | --------------------------------------- |
+| `npm run dev`   | Inicia la app en modo desarrollo        |
+| `npm run build` | Construye la aplicación para producción |
+| `npm start`     | Inicia la app en modo producción        |
+| `npm run lint`  | Linting del código                      |
 
-Licensed under the [MIT license](https://github.com/nextui-org/next-app-template/blob/main/LICENSE).
+---
+
+## 🧑‍💻 **Contribución**
+
+¡Las contribuciones son bienvenidas! Si tienes una mejora o encuentras un bug, siéntete libre de abrir un **issue** o enviar un **pull request**.
+
+---
+
+## 🛡️ **Licencia**
+
+Este proyecto está bajo la licencia **MIT**.
