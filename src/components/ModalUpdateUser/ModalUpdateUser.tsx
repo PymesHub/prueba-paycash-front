@@ -1,4 +1,4 @@
-"use client";
+import { useState } from "react";
 import { Button } from "@nextui-org/button";
 import {
   Modal,
@@ -7,18 +7,19 @@ import {
   ModalBody,
   ModalFooter,
 } from "@nextui-org/modal";
+import { useDateFormatter } from "@react-aria/i18n";
 import { FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-import { useDateFormatter } from "@react-aria/i18n";
-import { useState } from "react";
+import { CalendarDate } from "@internationalized/date";
 
-import InputForm from "../Input/Input";
-import Form from "../Form/Form";
 import DatePickerForm from "../DatePickerForm/DatePickerForm";
+import InputForm from "../Input/Input";
 import SelectForm from "../Select/Select";
+import { Form } from "../Form";
 
 import { UserRepository } from "@/src/repositories/User.repositories";
 import { UserModel } from "@/src/domain/models/User.model";
+
 interface ModalUpdateUserProps {
   title: string;
   isOpen: boolean;
@@ -27,11 +28,11 @@ interface ModalUpdateUserProps {
     name: string;
     lastName: string;
     email: string;
-    birthday: Date;
+    birthday: string | CalendarDate;
     genre: string;
-    isHighRisk?: boolean;
   };
 }
+
 const ModalUpdateUser: React.FC<ModalUpdateUserProps> = ({
   title,
   isOpen,
@@ -47,25 +48,30 @@ const ModalUpdateUser: React.FC<ModalUpdateUserProps> = ({
   });
 
   const onSubmit = async (data: any) => {
-    setLoading(true);
-    const user = new UserModel(
-      null,
-      data.name,
-      data.lastName,
-      data.email,
-      formatter.format(data.birthday.toDate()),
-      [...data?.genre][0],
-    );
+    try {
+      setLoading(true);
+      const user = new UserModel(
+        null,
+        data.name,
+        data.lastName,
+        data.email,
+        formatter.format(data.birthday.toDate()),
+        data.genre,
+      );
 
-    await userRepo.createUser(user);
-    setLoading(false);
-    onOpenChange();
+      await userRepo.updateUser(user);
+      setLoading(false);
+      onOpenChange();
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (_err) {
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <Modal
       backdrop="blur"
-      isDismissable={!loading}
       isOpen={isOpen}
       size="sm"
       onOpenChange={onOpenChange}
@@ -86,7 +92,6 @@ const ModalUpdateUser: React.FC<ModalUpdateUserProps> = ({
                   icon={<FaUser opacity={0.4} size={16} />}
                   label="Nombre"
                   name="name"
-                  placeholder="Ingresa el nombre"
                 />
                 <InputForm
                   required
