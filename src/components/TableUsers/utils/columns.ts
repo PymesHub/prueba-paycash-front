@@ -24,6 +24,11 @@ const columns = [
     uid: "actions",
     name: "Acciones",
   },
+  {
+    id: "id",
+    uid: "id",
+    name: "",
+  },
 ];
 
 export { columns };

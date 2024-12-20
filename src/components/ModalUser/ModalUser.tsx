@@ -12,6 +12,7 @@ import { FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { useDateFormatter } from "@react-aria/i18n";
 import { useState } from "react";
+import { useSWRConfig } from "swr";
 
 import InputForm from "../Input/Input";
 import Form from "../Form/Form";
@@ -20,6 +21,7 @@ import SelectForm from "../Select/Select";
 
 import { UserRepository } from "@/src/repositories/User.repositories";
 import { UserModel } from "@/src/domain/models/User.model";
+import { genreArray } from "@/src/utils/genreArray";
 interface ModalUserProps {
   title: string;
   isOpen: boolean;
@@ -31,6 +33,7 @@ const ModalUser: React.FC<ModalUserProps> = ({
   onOpenChange,
 }) => {
   const [loading, setLoading] = useState(false);
+  const { mutate } = useSWRConfig();
   const userRepo = new UserRepository();
   const formatter = useDateFormatter({
     year: "numeric",
@@ -50,6 +53,7 @@ const ModalUser: React.FC<ModalUserProps> = ({
     );
 
     await userRepo.createUser(user);
+    await mutate("/v1/get-users");
     setLoading(false);
     onOpenChange();
   };
@@ -105,7 +109,7 @@ const ModalUser: React.FC<ModalUserProps> = ({
                   errorMessage="Campo requerido"
                   label="Genero"
                   name="genre"
-                  options={[{ key: "male", label: "Hombre" }]}
+                  options={genreArray}
                   placeholder="Selecciona su género"
                 />
               </Form>

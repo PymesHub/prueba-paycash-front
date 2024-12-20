@@ -8,6 +8,7 @@ import {
   ModalFooter,
 } from "@nextui-org/modal";
 import { useState } from "react";
+import { useSWRConfig } from "swr";
 
 import { UserRepository } from "@/src/repositories/User.repositories";
 interface ModalDeleteUserProps {
@@ -23,12 +24,14 @@ const ModalDeleteUser: React.FC<ModalDeleteUserProps> = ({
   onOpenChange,
 }) => {
   const [loading, setLoading] = useState(false);
+  const { mutate } = useSWRConfig();
   const userRepo = new UserRepository();
   const onSubmit = async () => {
     try {
       setLoading(true);
 
       await userRepo.deleteUser(userId);
+      mutate("/v1/get-users");
       setLoading(false);
       onOpenChange();
     } catch (_err) {

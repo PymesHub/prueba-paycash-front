@@ -10,7 +10,7 @@ const Actions = () => {
 
   return (
     <>
-      <div className="w-full lg:order-2 flex items-end justify-start lg:justify-end">
+      <div className="w-full lg:order-2 flex items-end justify-end lg:justify-end">
         <Button
           color="primary"
           radius="sm"

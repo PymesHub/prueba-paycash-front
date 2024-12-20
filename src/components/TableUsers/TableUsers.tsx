@@ -49,7 +49,6 @@ const TableUsers = () => {
     dispatch({ type: "DELETE_USER", payload: { id } });
   };
 
-  const rows: Iterable<any> | undefined = [];
   const renderCell = useCallback(
     (user: UserModel, columnKey: keyof UserModel) => {
       switch (columnKey) {
@@ -83,8 +82,7 @@ const TableUsers = () => {
     },
     [],
   );
-
-  const { data, isLoading, error } = useSWR("/api/users", fetcher, {
+  const { data, isLoading, error } = useSWR("/v1/get-users", fetcher, {
     revalidateOnFocus: true,
     refreshInterval: 5000,
   });
@@ -97,10 +95,12 @@ const TableUsers = () => {
         <Table aria-label="Example static collection table">
           <TableHeader columns={columns}>
             {(column: { id: string; uid: string; name: string }) => (
-              <TableColumn key={column.id}>{column.name}</TableColumn>
+              <TableColumn key={column.id}>
+                <p className="text-sm">{column.name} </p>
+              </TableColumn>
             )}
           </TableHeader>
-          <TableBody items={rows}>
+          <TableBody items={data?.data as UserModel[]}>
             {(item) => (
               <TableRow key={item.id}>
                 {(columnKey) => (
@@ -132,7 +132,7 @@ const TableUsers = () => {
       <ModalDeleteUser
         isOpen={isOpenDelete}
         title="Eliminar Usuario"
-        userId={state.userModel?.id ?? ""}
+        userId={state?.id ?? ""}
         onOpenChange={onOpenChangeDelete}
       />
     </>

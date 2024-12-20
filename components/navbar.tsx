@@ -52,12 +52,18 @@ export const Navbar = () => {
         justify="end"
       />
 
-      <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
-        <Link isExternal aria-label="Github" href={siteConfig.links.github}>
+      <NavbarContent className=" basis-1 pl-4" justify="end">
+        <Link
+          isExternal
+          aria-label="Github"
+          href={"https://github.com/PymesHub"}
+        >
           <GithubIcon className="text-default-500" />
         </Link>
         <ThemeSwitch />
-        <NavbarMenuToggle />
+        <div className="sm:hidden">
+          <NavbarMenuToggle />
+        </div>
       </NavbarContent>
 
       <NavbarMenu>

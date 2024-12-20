@@ -1,5 +1,7 @@
 import { parseDate } from "@internationalized/date";
 
+import { parsedReverDate } from "../utils/parsedReverDate";
+
 import { Action, State } from "./reducer.types";
 
 const initialState: State = {
@@ -18,7 +20,7 @@ const reducer = (state: State, action: Action): State => {
           actions: undefined,
           birthday:
             typeof action.payload.birthday === "string"
-              ? parseDate(action.payload.birthday)
+              ? parseDate(parsedReverDate(action.payload.birthday))
               : action.payload.birthday,
         },
         id: null,

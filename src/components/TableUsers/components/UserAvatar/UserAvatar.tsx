@@ -1,4 +1,4 @@
-import { User } from '@nextui-org/user';
+import { User } from "@nextui-org/user";
 
 interface UserProps {
   name: string;
@@ -9,10 +9,11 @@ const UserAvatar: React.FC<UserProps> = ({ name, email }) => {
   return (
     <User
       avatarProps={{
-        name: name.split('')[0],
+        src: `https://avatar.iran.liara.run/public/`,
+        isBordered: true,
       }}
-      name={name}
       description={<p> {email} </p>}
+      name={<p className="text-xs lg:text-sm">{name}</p>}
     />
   );
 };

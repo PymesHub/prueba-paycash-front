@@ -27,6 +27,7 @@ export class UserRepository implements UserServiceInterface {
   public async updateUser(user: UserModel): Promise<void> {
     try {
       await axiosInstance.put("/v1/update-user", {
+        id: user.id,
         name: user.name,
         email: user.email,
         lastName: user.lastName,

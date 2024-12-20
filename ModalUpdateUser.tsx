@@ -11,6 +11,7 @@ import { useDateFormatter } from "@react-aria/i18n";
 import { FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { CalendarDate } from "@internationalized/date";
+import { useSWRConfig } from "swr";
 
 import { UserRepository } from "./src/repositories/User.repositories";
 import DatePickerForm from "./src/components/DatePickerForm/DatePickerForm";
@@ -18,6 +19,7 @@ import InputForm from "./src/components/Input/Input";
 import SelectForm from "./src/components/Select/Select";
 import { UserModel } from "./src/domain/models/User.model";
 import { Form } from "./src/components/Form";
+import { genreArray } from "./src/utils/genreArray";
 
 interface ModalUpdateUserProps {
   title: string;
@@ -38,6 +40,7 @@ const ModalUpdateUser: React.FC<ModalUpdateUserProps> = ({
   onOpenChange,
   defaultValues,
 }) => {
+  const { mutate } = useSWRConfig();
   const [loading, setLoading] = useState(false);
   const userRepo = new UserRepository();
   const formatter = useDateFormatter({
@@ -50,7 +53,7 @@ const ModalUpdateUser: React.FC<ModalUpdateUserProps> = ({
     try {
       setLoading(true);
       const user = new UserModel(
-        null,
+        data.id,
         data.name,
         data.lastName,
         data.email,
@@ -59,6 +62,7 @@ const ModalUpdateUser: React.FC<ModalUpdateUserProps> = ({
       );
 
       await userRepo.updateUser(user);
+      mutate("/v1/get-users");
       setLoading(false);
       onOpenChange();
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -117,7 +121,7 @@ const ModalUpdateUser: React.FC<ModalUpdateUserProps> = ({
                   errorMessage="Campo requerido"
                   label="Genero"
                   name="genre"
-                  options={[{ key: "male", label: "Hombre" }]}
+                  options={genreArray}
                   placeholder="Selecciona su género"
                 />
               </Form>
