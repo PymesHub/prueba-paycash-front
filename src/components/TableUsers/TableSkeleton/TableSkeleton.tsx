@@ -1,57 +1,33 @@
-const TableSkeleton = () => {
-  return (
-    <div className="animate-pulse">
-      {/* Header */}
-      <div className="flex items-center justify-between mb-4">
-        <div className="h-4 bg-gray-200 rounded w-1/2 sm:w-1/4" />
-        <div className="h-4 bg-gray-200 rounded w-1/3 sm:w-1/6" />
-      </div>
+"use client";
 
-      {/* Table */}
-      <div className="overflow-x-auto">
-        <table className="w-full border-collapse">
-          <thead>
-            <tr>
-              <th className="px-2 py-2 sm:px-4">
-                <div className="h-4 bg-gray-200 rounded w-16 sm:w-24" />
-              </th>
-              <th className="px-2 py-2 sm:px-4">
-                <div className="h-4 bg-gray-200 rounded w-20 sm:w-32" />
-              </th>
-              <th className="px-2 py-2 sm:px-4">
-                <div className="h-4 bg-gray-200 rounded w-12 sm:w-16" />
-              </th>
-              <th className="px-2 py-2 sm:px-4">
-                <div className="h-4 bg-gray-200 rounded w-16 sm:w-20" />
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {Array.from({ length: 5 }).map((_, index) => (
-              <tr key={index} className="border-b border-gray-200">
-                {/* First Column */}
-                <td className="px-2 py-4 sm:px-4">
-                  <div className="flex items-center space-x-3 sm:space-x-4">
-                    <div className="h-8 w-8 sm:h-10 sm:w-10 bg-gray-200 rounded-full" />
-                    <div className="h-4 bg-gray-200 rounded w-2/3 sm:w-3/4" />
-                  </div>
-                </td>
-                {/* Second Column */}
-                <td className="px-2 py-4 sm:px-4">
-                  <div className="h-4 bg-gray-200 rounded w-full" />
-                </td>
-                {/* Third Column */}
-                <td className="px-2 py-4 sm:px-4">
-                  <div className="h-4 bg-gray-200 rounded w-2/3 sm:w-3/4" />
-                </td>
-                {/* Fourth Column */}
-                <td className="px-2 py-4 sm:px-4">
-                  <div className="h-4 bg-gray-200 rounded w-1/2 sm:w-1/2" />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+import { Skeleton } from "@nextui-org/react";
+
+const TableSkeleton: React.FC = () => {
+  return (
+    <div className="p-4 bg-gray-200 dark:bg-gray-800 rounded-md shadow-md">
+      <div className="w-full bg-gray-300 dark:bg-gray-900 rounded-md">
+        {/* Skeleton rows */}
+        {[...Array(3)].map((_, index) => (
+          <div
+            key={index}
+            className="grid grid-cols-5 items-center py-3 px-4 space-x-4 animate-pulse"
+          >
+            <div className="flex items-center space-x-2">
+              <Skeleton
+                className="rounded-full"
+                style={{ width: 40, height: 40 }}
+              />
+              <Skeleton className="rounded w-3/4" style={{ height: 16 }} />
+            </div>
+            <Skeleton className="rounded w-3/5" style={{ height: 16 }} />
+            <Skeleton className="rounded w-1/3" style={{ height: 16 }} />
+            <Skeleton className="rounded w-1/2" style={{ height: 16 }} />
+            <div className="flex space-x-2">
+              <Skeleton className="rounded" style={{ width: 32, height: 32 }} />
+              <Skeleton className="rounded" style={{ width: 32, height: 32 }} />
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
