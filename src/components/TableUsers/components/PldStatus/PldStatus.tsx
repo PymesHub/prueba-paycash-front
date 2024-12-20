@@ -13,8 +13,9 @@ const statusColorMap: {
     | "secondary"
     | "warning";
 } = {
-  highRisk: "danger",
-  cleanPerson: "success",
+  isHghRisk: "danger",
+  isLowRisk: "success",
+  isModerateRisk: "warning",
   waiting: "default",
 };
 
