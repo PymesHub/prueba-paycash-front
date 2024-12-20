@@ -84,7 +84,7 @@ const TableUsers = () => {
   );
   const { data, isLoading, error } = useSWR("/v1/get-users", fetcher, {
     revalidateOnFocus: true,
-    refreshInterval: 5000,
+    refreshInterval: 10000,
   });
 
   return (
